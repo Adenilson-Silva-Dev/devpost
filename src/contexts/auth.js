@@ -11,6 +11,17 @@ function AuthProvaider({ children }) {
   const [loading, setLoading] = useState(false);
   const [authLoading, setAuthLoading] = useState(false);
 
+  useEffect(()=>{
+    async function loadStorange(){
+        const storangeUser = await AsyncStorage.getItem('@devpost');
+
+        if(storangeUser){
+            setUser(JSON.parse(storangeUser))
+        }
+    }
+
+    loadStorange();
+  },[])
   async function singnUp(email, password, name) {
     setAuthLoading(true);
     await auth()
@@ -32,6 +43,7 @@ function AuthProvaider({ children }) {
               email: value.user.email,
             };
             setUser(data);
+            storangeUser(data);
             setAuthLoading(false);
           });
       })
@@ -59,6 +71,7 @@ function AuthProvaider({ children }) {
         };
 
         setUser(data);
+        storangeUser(data);
         setAuthLoading(false);
       })
       .catch(error => {
@@ -68,6 +81,9 @@ function AuthProvaider({ children }) {
   }
 
 
+  async function storangeUser(data){
+    await AsyncStorage.setItem('@devpost', JSON.stringify(data))
+  }
   return (
     <AuthContext.Provider
       value={{ signed: !!user, user, loading, singnUp, signIn, authLoading }}
