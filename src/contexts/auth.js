@@ -6,21 +6,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext({});
 
-function AuthProvaider({ children }) {
+function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [authLoading, setAuthLoading] = useState(false);
 
   useEffect(()=>{
-    async function loadStorange(){
+    async function loadStorage(){
         const storangeUser = await AsyncStorage.getItem('@devpost');
 
         if(storangeUser){
             setUser(JSON.parse(storangeUser))
+            setAuthLoading(false)
         }
     }
 
-    loadStorange();
+    loadStorage();
   },[])
   async function singnUp(email, password, name) {
     setAuthLoading(true);
@@ -80,17 +81,27 @@ function AuthProvaider({ children }) {
       });
   }
 
+  async function signOut(){
+   await auth().signOut();
 
+   await AsyncStorage.clear()
+   .then(()=>{
+    setUser(null)
+   })
+  
+
+  }
+console.log(user)
   async function storangeUser(data){
     await AsyncStorage.setItem('@devpost', JSON.stringify(data))
   }
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, loading, singnUp, signIn, authLoading }}
+      value={{ signed: !!user, user, loading, singnUp, signIn,signOut, authLoading }}
     >
       {children}
     </AuthContext.Provider>
   );
 }
 
-export default AuthProvaider;
+export default AuthProvider;
