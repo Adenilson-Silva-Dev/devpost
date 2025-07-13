@@ -75,7 +75,7 @@ function NewPost() {
 
       .then(() => {
         setPost('');
-        alert('Post realizado com sucesso!');
+       console.log("Post criado com sucesso!")
       })
       .catch(error => {
         alert('Erro ao criar post', error);
