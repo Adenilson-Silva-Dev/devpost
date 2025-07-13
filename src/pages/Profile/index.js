@@ -11,7 +11,7 @@ function Profile() {
   }
 
   function atualizarPerfil(){
-    alert('Deseja atualizar')
+    console.log('Deseja atualizar')
   }
   return (
     <View style={Style.Container}>

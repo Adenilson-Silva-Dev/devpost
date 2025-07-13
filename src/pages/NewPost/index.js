@@ -78,7 +78,7 @@ function NewPost() {
        console.log("Post criado com sucesso!")
       })
       .catch(error => {
-        alert('Erro ao criar post', error);
+        console.log('Erro ao criar post', error);
       });
     navigation.goBack();
   }
