@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { AuthContext } from '../../contexts/auth';
 import Icon from 'react-native-vector-icons/Feather';
+import Header from '../../components/Header';
 
 function Profile() {
   const { user,signOut } = useContext(AuthContext);
@@ -15,7 +16,9 @@ function Profile() {
   }
   return (
     <View style={Style.Container}>
-      <TouchableOpacity style={Style.AreaAvatar} activeOpacity={.8} onPress={atualizarPerfil}>
+      <Header/>
+     <View style={Style.AreaProfile}>
+       <TouchableOpacity style={Style.AreaAvatar} activeOpacity={.8} onPress={atualizarPerfil}>
         <Image style={Style.Avatar} source={require('../../imgs/avatar.png')} />
 
         <View style={Style.ContainerIcon}>
@@ -39,6 +42,7 @@ function Profile() {
       <TouchableOpacity style={[Style.Button, {backgroundColor:'trasparent', borderWidth:1, borderColor:'#fff'}]} onPress={handleSignOut}>
         <Text style={{ color: '#e52246', fontSize: 20 }}>Sair</Text>
       </TouchableOpacity>
+     </View>
     </View>
   );
 }
@@ -46,11 +50,13 @@ function Profile() {
 const Style = StyleSheet.create({
   Container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#353840',
   },
-
+AreaProfile:{
+  flex:1,
+  alignItems:'center',
+  justifyContent:'center',
+},
   Button: {
     width: '80%',
     height: 50,

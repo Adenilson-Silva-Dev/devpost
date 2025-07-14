@@ -49,7 +49,7 @@ function Login() {
       <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
         <View style={Style.Container}>
           <Text style={Style.Title}>
-            Dev<Text style={[{ color: '#e52246' }]}>Post</Text>
+            Dev<Text style={[{ color: '#e52246', fontStyle:"italic" }]}>Post</Text>
           </Text>
           <TextInput
             value={email}
@@ -85,7 +85,7 @@ function Login() {
     <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
       <View style={Style.Container}>
         <Text style={Style.Title}>
-          Dev<Text style={[{ color: '#e52246' }]}>Post</Text>
+          Dev<Text style={[{ color: '#e52246', fontStyle:'italic'}]}>Post</Text>
         </Text>
         <TextInput
           value={nome}
