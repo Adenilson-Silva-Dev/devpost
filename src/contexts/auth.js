@@ -97,7 +97,7 @@ console.log(user)
   }
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, loading, singnUp, signIn,signOut, authLoading }}
+      value={{ signed: !!user, user, loading,setLoading, singnUp, signIn,signOut, authLoading }}
     >
       {children}
     </AuthContext.Provider>
