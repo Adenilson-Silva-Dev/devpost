@@ -5,44 +5,50 @@ import Icon from 'react-native-vector-icons/Feather';
 import Header from '../../components/Header';
 
 function Profile() {
-  const { user,signOut } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
   async function handleSignOut() {
     await signOut();
   }
 
-  function atualizarPerfil(){
-    console.log('Deseja atualizar')
+  function atualizarPerfil() {
+    console.log('Deseja atualizar');
   }
   return (
     <View style={Style.Container}>
-      <Header/>
-     <View style={Style.AreaProfile}>
-       <TouchableOpacity style={Style.AreaAvatar} activeOpacity={.8} onPress={atualizarPerfil}>
-        <Image style={Style.Avatar} source={require('../../imgs/avatar.png')} />
+      <Header />
+      <View style={Style.AreaProfile}>
+        <TouchableOpacity style={Style.AreaAvatar} activeOpacity={0.8} onPress={atualizarPerfil}>
+          <Image style={Style.Avatar} source={require('../../imgs/avatar.png')} />
 
-        <View style={Style.ContainerIcon}>
-          <View style={Style.AreaIcon}>
-            <Icon name="edit-2" size={20} color={'#383940'} />
+          <View style={Style.ContainerIcon}>
+            <View style={Style.AreaIcon}>
+              <Icon name="edit-2" size={20} color={'#383940'} />
+            </View>
           </View>
+        </TouchableOpacity>
+
+        <View style={Style.AreaInfo}>
+          <Text numberOfLines={1} style={Style.NameUser}>
+            {user.nome}
+          </Text>
+          <Text style={Style.Email}>{user.email}</Text>
         </View>
-      </TouchableOpacity>
 
-      <View style={Style.AreaInfo}>
-        <Text numberOfLines={1} style={Style.NameUser}>
-          {user.nome}
-        </Text>
-        <Text style={Style.Email}>{user.email}</Text>
+        <TouchableOpacity style={Style.Button} onPress={atualizarPerfil}>
+          <Text style={{ color: '#fff', fontSize: 20 }}>Atualizar perfil</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            Style.Button,
+            { backgroundColor: 'trasparent', borderWidth: 1, borderColor: '#fff' },
+          ]}
+          onPress={handleSignOut}
+        >
+          <Text style={{ color: '#e52246', fontSize: 20 }}>Sair</Text>
+        </TouchableOpacity>
       </View>
-
-      <TouchableOpacity style={Style.Button} onPress={atualizarPerfil} >
-        <Text style={{ color: '#fff', fontSize: 20 }}>Atualizar perfil</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={[Style.Button, {backgroundColor:'trasparent', borderWidth:1, borderColor:'#fff'}]} onPress={handleSignOut}>
-        <Text style={{ color: '#e52246', fontSize: 20 }}>Sair</Text>
-      </TouchableOpacity>
-     </View>
     </View>
   );
 }
@@ -52,18 +58,18 @@ const Style = StyleSheet.create({
     flex: 1,
     backgroundColor: '#353840',
   },
-AreaProfile:{
-  flex:1,
-  alignItems:'center',
-  justifyContent:'center',
-},
+  AreaProfile: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   Button: {
     width: '80%',
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 4,
-    marginBottom:8,
+    marginBottom: 8,
     backgroundColor: '#428CFD',
   },
 
@@ -82,23 +88,22 @@ AreaProfile:{
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom:8
+    marginBottom: 8,
   },
   NameUser: {
-    width:'50%',
-    textAlign:  'center',
+    width: '50%',
+    textAlign: 'center',
     alignSelf: 'center',
     fontSize: 25,
     fontWeight: '900',
     color: '#fff',
   },
-Email:{
-
-    fontSize:18,
+  Email: {
+    fontSize: 18,
     fontStyle: 'italic',
-    marginBottom:18,
-    color:'#fff'
-},
+    marginBottom: 18,
+    color: '#fff',
+  },
   ContainerIcon: {
     width: '25%',
     height: 40,
@@ -107,7 +112,6 @@ Email:{
 
     position: 'absolute',
     bottom: 0,
-   
   },
 
   AreaIcon: {
@@ -115,9 +119,8 @@ Email:{
     height: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius:'100%',
-    backgroundColor:'#fff',
-    
+    borderRadius: '100%',
+    backgroundColor: '#fff',
   },
   Icon: {
     borderRadius: '100%',

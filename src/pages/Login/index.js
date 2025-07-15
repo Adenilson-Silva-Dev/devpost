@@ -12,66 +12,60 @@ import {
 import { AuthContext } from '../../contexts/auth';
 
 function Login() {
-
   const [login, setLogin] = useState(true);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {singnUp,signIn,authLoading} = useContext(AuthContext);
-
+  const { singnUp, signIn, authLoading } = useContext(AuthContext);
   function toggleLogin() {
     setLogin(!login);
 
-    setNome("");
-    setEmail("");
-    setPassword("");
+    setNome('');
+    setEmail('');
+    setPassword('');
   }
 
-  async function handleLogin(){
-    if(email === "" || password ===""){
-      alert("Preecha todos os campos");
-      return
-      ;
+  async function handleLogin() {
+    if (email === '' || password === '') {
+      alert('Preecha todos os campos');
+      return;
     }
-   await signIn(email, password);
+    await signIn(email, password);
   }
 
-  async function handleSignUp(){
-    if(nome===""|| email === "" || password ===""){
-      alert("Preecha todos os campos");
-      return
-      ;
+  async function handleSignUp() {
+    if (nome === '' || email === '' || password === '') {
+      alert('Preecha todos os campos');
+      return;
     }
-    await singnUp(email,password,nome)
+    await singnUp(email, password, nome);
   }
   if (login) {
     return (
       <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
         <View style={Style.Container}>
           <Text style={Style.Title}>
-            Dev<Text style={[{ color: '#e52246', fontStyle:"italic" }]}>Post</Text>
+            Dev<Text style={[{ color: '#e52246', fontStyle: 'italic' }]}>Post</Text>
           </Text>
           <TextInput
             value={email}
-            onChangeText={value => setEmail(value)}
+            onChangeText={(value) => setEmail(value)}
             style={Style.Input}
             placeholder="Seu email..."
           />
           <TextInput
             value={password}
-            onChangeText={value => setPassword(value)}
+            onChangeText={(value) => setPassword(value)}
             secureTextEntry={true}
             style={Style.Input}
             placeholder="Sua senha..."
           />
           <TouchableOpacity style={Style.Button} onPress={handleLogin}>
             {authLoading ? (
-              <ActivityIndicator size={"large"} color={"#fff"}/>
-            ):
-            (<Text style={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}>
-              Login
-            </Text>)
-            }
+              <ActivityIndicator size={'large'} color={'#fff'} />
+            ) : (
+              <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}>Login</Text>
+            )}
           </TouchableOpacity>
 
           <TouchableOpacity style={Style.Link} onPress={toggleLogin}>
@@ -85,34 +79,33 @@ function Login() {
     <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
       <View style={Style.Container}>
         <Text style={Style.Title}>
-          Dev<Text style={[{ color: '#e52246', fontStyle:'italic'}]}>Post</Text>
+          Dev<Text style={[{ color: '#e52246', fontStyle: 'italic' }]}>Post</Text>
         </Text>
         <TextInput
           value={nome}
-          onChangeText={value => setNome(value)}
+          onChangeText={(value) => setNome(value)}
           style={Style.Input}
           placeholder="Adenilson"
         />
         <TextInput
           value={email}
-          onChangeText={value => setEmail(value)}
+          onChangeText={(value) => setEmail(value)}
           style={Style.Input}
           placeholder="adenilsontosa@gmail.com"
         />
         <TextInput
           value={password}
-          onChangeText={value => setPassword(value)}
+          onChangeText={(value) => setPassword(value)}
           secureTextEntry={true}
           style={Style.Input}
           placeholder="*********"
         />
         <TouchableOpacity style={Style.Button} onPress={handleSignUp}>
-         {authLoading ? (
-          <ActivityIndicator size={"large"} color={"#fff"}/>
-         ):(
-           <Text style={{ fontSize: 20, color: '#fff' }}>Criar conta</Text>
-         )
-         }
+          {authLoading ? (
+            <ActivityIndicator size={'large'} color={'#fff'} />
+          ) : (
+            <Text style={{ fontSize: 20, color: '#fff' }}>Criar conta</Text>
+          )}
         </TouchableOpacity>
 
         <TouchableOpacity style={Style.Link} onPress={toggleLogin}>
@@ -165,3 +158,4 @@ const Style = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+git 
