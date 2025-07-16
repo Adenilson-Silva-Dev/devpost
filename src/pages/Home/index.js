@@ -53,6 +53,7 @@ function Home() {
     }, [])
   );
 
+  //Buscar mais posts quando puxar sua lista para cima
   async function handleRefreshPosts() {
     setLoadingRefresh(true);
     setPost([]);
@@ -79,6 +80,32 @@ function Home() {
       });
     setLoadingRefresh(false);
   }
+
+  // Buscar mais posts ao chear no final da lista
+
+  async function getListPost() {
+    if(emptyList){
+      setLoading(false);
+      return null
+    }
+
+    if(loading)return;
+
+    firestore().collection('posts').orderBy('created','desc').limit(5).startAfter(lastItem).get()
+    .then((snaphot)=>{
+      const postList = [];
+      snaphot.docs.map(u=>{
+        postList.push({
+          ...u.data(),
+          id:u.id,
+        })
+      })
+      setEmptyList(!!snaphot.empty)
+      setLastItem(snaphot.docs[snaphot.docs.length -1])
+      setPost(oldPost => [...oldPost, ...postList])
+      setLoading(false)
+    })
+  }
   return (
     <View style={Styles.Container}>
       <Header />
@@ -95,6 +122,8 @@ function Home() {
           style={Styles.ListPost}
           refreshing={loadingRefresh}
           onRefresh={handleRefreshPosts}
+          onEndReached={()=> getListPost()} // quando chegar no final do posts irá disparar está função
+          onEndReachedThreshold={0.1} // quando chegar a 10% da lista irá disparar essa função
         />
       )}
 
