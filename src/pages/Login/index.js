@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  Keyboard,
   ActivityIndicator,
+  Keyboard,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { AuthContext } from '../../contexts/auth';
 
@@ -158,4 +158,3 @@ const Style = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-git 

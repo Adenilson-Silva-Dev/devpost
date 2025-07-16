@@ -3,6 +3,7 @@ import globals from 'globals';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactNative from 'eslint-plugin-react-native';
 import pluginPrettier from 'eslint-plugin-prettier';
+import pluginImport from 'eslint-plugin-import'; // 👈 Adicionado
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
@@ -20,6 +21,7 @@ export default defineConfig([
       react: pluginReact,
       'react-native': pluginReactNative,
       prettier: pluginPrettier,
+      import: pluginImport, // 👈 Adicionado
     },
     rules: {
       // Regras React
@@ -30,6 +32,9 @@ export default defineConfig([
       // Regras gerais
       'no-use-before-define': ['error', { variables: false }],
       'no-unused-vars': 'error',
+
+      // Regras de importação (remove imports não usados)
+      'import/no-unused-modules': ['warn', { unusedExports: true }],
 
       // Regras React Native
       'react-native/no-unused-styles': 'warn',
